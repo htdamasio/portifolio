@@ -4,6 +4,9 @@ import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
+import ApolloContext, { initApollo } from "./context/apollo";
+import { ApolloProvider } from "@apollo/client/react";
+import { getDataFromTree } from "@apollo/client/react/ssr";
 
 const ABORT_DELAY = 5000;
 
@@ -34,38 +37,51 @@ function handleBotRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  return new Promise((resolve, reject) => {
-    let didError = false;
+  const client = initApollo();
 
-    const { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} />,
-      {
-        onAllReady() {
-          const body = new PassThrough();
+  const App = (
+    <ApolloProvider client={client}>
+      <RemixServer context={remixContext} url={request.url} />
+    </ApolloProvider>
+  );
+  return getDataFromTree(App).then(() => {
+    const initialState = client.extract();
 
-          responseHeaders.set("Content-Type", "text/html");
+    return new Promise((resolve, reject) => {
+      let didError = false;
 
-          resolve(
-            new Response(body, {
-              headers: responseHeaders,
-              status: didError ? 500 : responseStatusCode,
-            })
-          );
+      const { pipe, abort } = renderToPipeableStream(
+        <ApolloContext.Provider value={initialState}>
+          {App}
+        </ApolloContext.Provider>,
+        {
+          onAllReady() {
+            const body = new PassThrough();
 
-          pipe(body);
-        },
-        onShellError(error: unknown) {
-          reject(error);
-        },
-        onError(error: unknown) {
-          didError = true;
+            responseHeaders.set("Content-Type", "text/html");
 
-          console.error(error);
-        },
-      }
-    );
+            resolve(
+              new Response(body, {
+                headers: responseHeaders,
+                status: didError ? 500 : responseStatusCode,
+              })
+            );
 
-    setTimeout(abort, ABORT_DELAY);
+            pipe(body);
+          },
+          onShellError(error: unknown) {
+            reject(error);
+          },
+          onError(error: unknown) {
+            didError = true;
+
+            console.error(error);
+          },
+        }
+      );
+
+      setTimeout(abort, ABORT_DELAY);
+    });
   });
 }
 
@@ -75,37 +91,50 @@ function handleBrowserRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  return new Promise((resolve, reject) => {
-    let didError = false;
+  const client = initApollo();
 
-    const { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} />,
-      {
-        onShellReady() {
-          const body = new PassThrough();
+  const App = (
+    <ApolloProvider client={client}>
+      <RemixServer context={remixContext} url={request.url} />
+    </ApolloProvider>
+  );
+  return getDataFromTree(App).then(() => {
+    const initialState = client.extract();
 
-          responseHeaders.set("Content-Type", "text/html");
+    return new Promise((resolve, reject) => {
+      let didError = false;
 
-          resolve(
-            new Response(body, {
-              headers: responseHeaders,
-              status: didError ? 500 : responseStatusCode,
-            })
-          );
+      const { pipe, abort } = renderToPipeableStream(
+        <ApolloContext.Provider value={initialState}>
+          {App}
+        </ApolloContext.Provider>,
+        {
+          onShellReady() {
+            const body = new PassThrough();
 
-          pipe(body);
-        },
-        onShellError(err: unknown) {
-          reject(err);
-        },
-        onError(error: unknown) {
-          didError = true;
+            responseHeaders.set("Content-Type", "text/html");
 
-          console.error(error);
-        },
-      }
-    );
+            resolve(
+              new Response(body, {
+                headers: responseHeaders,
+                status: didError ? 500 : responseStatusCode,
+              })
+            );
 
-    setTimeout(abort, ABORT_DELAY);
+            pipe(body);
+          },
+          onShellError(err: unknown) {
+            reject(err);
+          },
+          onError(error: unknown) {
+            didError = true;
+
+            console.error(error);
+          },
+        }
+      );
+
+      setTimeout(abort, ABORT_DELAY);
+    });
   });
 }

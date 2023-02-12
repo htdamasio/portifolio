@@ -3,6 +3,8 @@ import { styled } from "~/configuration.stitches"
 import Hero from "~/components/sections/hero"
 import NavigationBar from "../components/navbar"
 import About from "~/components/sections/about"
+import { gql, useQuery } from "@apollo/client"
+import Jobs from "~/components/sections/jobs"
 
 const Main = styled('main', {
   mx: "auto",
@@ -20,6 +22,8 @@ const Main = styled('main', {
   // "@xs": { px: "50px" },
 })
 
+
+
 export default function Index() {
   return (
     <>
@@ -28,25 +32,9 @@ export default function Index() {
         <Main>
           <Hero />
           <About />
+          <Jobs />
         </Main>
       </div>
-      {/* <Box align="center" direction="row">
-        <h1 className="teste">Hello world!</h1>
-        <Button style="ghost">
-          Teste
-        </Button>
-        <Button style="secondary">
-          Teste2
-        </Button>
-        <Button
-          style="outline"
-          rounded
-          bordered
-          size="sm"
-        >
-          <Link to="demo">Go to Demo Page</Link>
-        </Button>
-      </Box> */}
     </>
   )
 }

@@ -1,10 +1,13 @@
+import { styled } from "~/configuration.stitches";
 import { SectionStyled, SmallHeading, BigHeading } from "~/styles/generalStyles";
 
+const HeroSectionStyled = styled(SectionStyled, {
+    minHeight: "100vh"
+})
+
 export default function Hero() {
-
-
     return (
-        <SectionStyled id="hero">
+        <HeroSectionStyled id="hero">
             {/* TODO: Add animations to divs */}
             <div>
                 <SmallHeading>Hi, my name is</SmallHeading>
@@ -25,6 +28,6 @@ export default function Hero() {
                     .
                 </p>
             </div>
-        </SectionStyled>
+        </HeroSectionStyled>
     );
 }

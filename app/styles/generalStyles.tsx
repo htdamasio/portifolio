@@ -36,9 +36,12 @@ export const SectionStyled = styled('section', {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    minHeight: "100vh",
-    height: "100vh",
-    pa: "0",
+    // minHeight: "100vh",
+    // height: "100vh",
+    py: "0",
+    // mx: "clamp(25px, 10vw, 150px)",
+    mx: "auto",
+    maxWidth: "900px",
 
     "-webkkit-box-align": "center",
     "-webkit-box-pack": "center",
@@ -62,8 +65,8 @@ export const StyledHeader = styled('h2', {
     alignItems: "center",
     position: "relative",
     width: "100%",
-    mt: "10px",
-    mb: "40px",
+    mt: "5px",
+    mb: "20px",
     whiteSpace: "nowrap",
     fontSize: "clamp($6,5vw,$2)",
     color: "$slateLighter",
@@ -94,3 +97,90 @@ export const StyledHeader = styled('h2', {
         backgroundColor: "$secondaryHover"
     }
 })
+
+export const StyledUlList = styled('ul', {
+    variants: {
+        columns: {
+            1: {
+                columnCount: "1",
+            },
+            2: {
+                columnCount: "2",
+            }
+        },
+        ml: {
+            "20": {
+                ml: "20px",
+            },
+            "none": {
+                ml: "0",
+            }
+        },
+        arrowTop: {
+            15: {
+                "& li": {
+                    "&:before": {
+                        top: "15%",
+                    }
+                }
+            },
+            25: {
+                "& li": {
+                    "&:before": {
+                        top: "25%",
+                    }
+                }
+            }
+        },
+        arrowSize: {
+            "small": {
+                "& li": {
+                    "&:before": {
+                        fontSize: "$7",
+                    }
+                }
+            },
+            "medium": {
+                "& li": {
+                    "&:before": {
+                        fontSize: "$5",
+                    }
+                }
+            },
+            "large": {
+                "& li": {
+                    "&:before": {
+                        fontSize: "$3",
+                    }
+                }
+            }
+        }
+    },
+    defaultVariants: {
+        columns: 2,
+        arrowTop: 15,
+        arrowSize: "small",
+        ml: "20"
+    },
+
+    mt: "20px",
+    listStyleType: "none",
+
+    "& li": {
+        position: "relative",
+        marginBottom: "10px",
+        pl: "20px",
+        fontFamily: "$mono",
+        fontSize: "13px",
+        color: "$slateLighter",
+
+
+        "&:before": {
+            content: "▹",
+            position: "absolute",
+            left: "0px",
+            color: "$secondary",
+            lineHeight: "12px"
+        }
+    }
+});

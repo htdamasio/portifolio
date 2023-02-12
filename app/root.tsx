@@ -6,10 +6,13 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useOutletContext
 } from "@remix-run/react";
 
 import type { LinksFunction } from "@remix-run/node";
 import { globalStyles } from "./configuration.stitches";
+import React from 'react'
+import ApolloContext from "./context/apollo"
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: globalStyles() },
@@ -22,6 +25,7 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const initialState = React.useContext(ApolloContext)
   return (
     <html lang="en">
       <head>
@@ -33,6 +37,14 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__INITIAL_STATE__=${JSON.stringify(
+              initialState
+            ).replace(/</g, "\\u003c")}`
+          }}
+        />
       </body>
     </html>
   );
