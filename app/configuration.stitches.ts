@@ -14,11 +14,11 @@ export const {
         colors: {
             // primary: "#04043b",
             primary: "#0C1D36",
-            primarLight: "#315484",
+            primaryLight: "#315484",
             primaryLighter: "#0459f5",
 
             // primary: "#000033",
-            // primarLight: "000099",
+            // primaryLight: "000099",
             // primaryLighter: "1A1AFF",
 
             secondary: "#F9CC0B",
