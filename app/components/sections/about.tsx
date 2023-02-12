@@ -45,6 +45,7 @@ const ProfileWrapper = styled('div', {
 
         "@md": {
             ml: "0px",
+            width: "75%",
         }
 
     }

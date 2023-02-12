@@ -11,6 +11,9 @@ const JobsSectionStyled = styled(SectionStyled, {
 const Inner = styled('div', {
     display: "flex",
     minHeight: "340px",
+    "@xs": {
+        flexDirection: "column"
+    }
 });
 
 const JobsList = styled('div', {
@@ -21,12 +24,22 @@ const JobsList = styled('div', {
     padding: "0px",
     margin: "0px",
     listStyle: "none",
+    "@xs": {
+        display: "flex",
+        flexDirection: "row",
+        width: "auto",
+        overflowX: "scroll",
+        scrollbarColor: "black",
+    }
 });
 
 const JobDescription = styled('div', {
     position: "relative",
     width: "100%",
-    ml: "20px"
+    ml: "20px",
+    "@xs": {
+        ml: "0px",
+    }
 });
 
 const JobPanel = styled('div', {
@@ -73,6 +86,17 @@ const JobButton = styled('button', {
 
     "&:active, &:selected": {
         color: "$secondary"
+    },
+
+    "@xs": {
+        borderLeft: "none",
+        borderTop: "2px solid $secondaryHover",
+        borderTopRightRadius: "0px",
+        borderBottomRightRadius: "0px",
+        '&[aria-selected="true"]': {
+            borderLeft: "none",
+            borderTop: "2px solid $secondary",
+        },
     }
 });
 
@@ -102,10 +126,7 @@ const JobHeader = styled('h3', {
         color: "$slateLight",
         fontFamily: "$mono",
         fontSize: "14px",
-    }
-});
-
-const JobStyledUlList = styled(StyledUlList, {
+    },
 });
 
 // GraphQL query
@@ -127,20 +148,29 @@ const WORK_PLACES = gql`
 interface JobType {
     id: number;
     date: Date;
-    title: String;
-    company: String;
-    location: String;
-    range: String;
-    url: String;
-    experience: String[];
+    title: string;
+    company: string;
+    location: string;
+    range: string;
+    url: string;
+    experience: string[];
 }
 
 export default function Jobs() {
     const { data, error, loading } = useQuery(WORK_PLACES);
 
-    const [jobs, setJobs] = useState([])
+    const [jobs, setJobs] = useState<JobType[]>([])
     const [selectedButton, setSelectedButton] = useState(-1)
-    const [selectedJob, setSelectedJob]: JobType = useState({})
+    const [selectedJob, setSelectedJob] = useState<JobType>({
+        id: 0,
+        date: new Date(),
+        title: "",
+        company: "",
+        location: "",
+        range: "",
+        url: "",
+        experience: [],
+    })
 
     useEffect(() => {
         if (data) {
@@ -158,9 +188,9 @@ export default function Jobs() {
 
     function onButtonClicked(ev: React.MouseEvent<HTMLButtonElement>, id: number) {
         setSelectedButton(id)
-
-        if (jobs.find(jb => jb.id === id)) {
-            setSelectedJob(jobs.find(jb => jb.id === id));
+        let selectedJob: JobType | null = jobs.find(jb => jb.id === id) ?? null;
+        if (selectedJob) {
+            setSelectedJob(selectedJob);
         }
     }
 
@@ -220,7 +250,6 @@ export default function Jobs() {
                                 {displayExperiences()}
                             </StyledUlList>
                         </div>
-                        aqui vai o texto
                     </JobPanel>
                 </JobDescription>
             </Inner>
