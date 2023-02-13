@@ -67,12 +67,13 @@ const Technologies = gql`
 
 interface technologyType {
     id: number,
-    name: string
+    name: string,
+    url: string
 }
 
 export default function About() {
     const { data, error, loading } = useQuery(Technologies);
-    const [tech, setTech] = useState([]);
+    const [tech, setTech] = useState<technologyType[]>([]);
 
     useEffect(() => {
         if (data) {
