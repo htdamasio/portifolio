@@ -7,7 +7,7 @@ const initialState = isBrowser ? window.__INITIAL_STATE__ : {}
 
 export function initApollo(ssrMode = true) {
     return new ApolloClient({
-        uri: "http://localhost:9001/",
+        uri: "https://portifolio-api-pi.vercel.app/", //"http://localhost:9001/",
         cache: new InMemoryCache().restore(initialState),
         ssrMode
     });
