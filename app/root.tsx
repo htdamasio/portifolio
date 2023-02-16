@@ -14,6 +14,7 @@ import type { LinksFunction } from "@remix-run/node";
 import { globalStyles } from "./configuration.stitches";
 import React from 'react'
 import ApolloContext from "./context/apollo"
+import { Analytics } from '@vercel/analytics/react';
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: globalStyles() },
@@ -52,6 +53,7 @@ export default function App() {
       </head>
       <body>
         <Outlet />
+        <Analytics />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
