@@ -2,7 +2,7 @@ import { styled } from "~/configuration.stitches";
 import { SectionStyled, SmallHeading, BigHeading } from "~/styles/generalStyles";
 
 const HeroSectionStyled = styled(SectionStyled, {
-    minHeight: "100vh"
+    minHeight: "86vh"
 })
 
 export default function Hero() {

@@ -9,7 +9,7 @@ const InnerContent = styled('div', {
     gridTemplateColumns: "3fr 2fr",
     gap: "30px",
 
-    "@md": {
+    "@sm": {
         gridTemplateColumns: "1fr"
     }
 });
@@ -43,16 +43,21 @@ const ProfileWrapper = styled('div', {
             boxShadow: "0 0 30px -10px #F9CC0B",
         },
 
-        "@md": {
+        "@sm": {
             ml: "0px",
-            width: "75%",
+            width: "50%",   
+        },
+
+        "@xs": {
+            ml: "0px",
+            width: "75%",   
         }
 
     }
 });
 
 const AboutSectionStyled = styled(SectionStyled, {
-    py: "100px"
+    py: "75px"
 })
 
 const Technologies = gql`
