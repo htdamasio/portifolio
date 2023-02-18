@@ -1,5 +1,5 @@
 import { styled } from "~/configuration.stitches";
-import { SectionStyled, SmallHeading, BigHeading } from "~/styles/generalStyles";
+import { SectionStyled, SmallHeading, BigHeading, AnimatedLink } from "~/styles/generalStyles";
 
 const HeroSectionStyled = styled(SectionStyled, {
     minHeight: "86vh"
@@ -23,9 +23,7 @@ export default function Hero() {
 
             <div>
                 <p>
-                    I'm a software developer that loves building and designing amazing digital experiences. And I'm always seeking new opportunities to grow! Currently helping change the financial market at
-                    <a href="https://www.nelogica.com.br" target="_blank" rel="noreferrer"> Nelogica</a>
-                    .
+                    I'm a software developer that loves building and designing amazing digital experiences. And I'm always seeking new opportunities to grow! Currently helping change the financial market at <AnimatedLink href="https://www.nelogica.com.br" target="_blank" rel="noreferrer"> Nelogica</AnimatedLink>.
                 </p>
             </div>
         </HeroSectionStyled>

@@ -1,5 +1,5 @@
 import { styled } from "~/configuration.stitches";
-import { SectionStyled, StyledHeader } from "~/styles/generalStyles";
+import { SectionStyled, StyledHeader, AnimatedLink } from "~/styles/generalStyles";
 import { Button } from "../buttons";
 
 const ContactSectionStyled = styled(SectionStyled, {
@@ -32,7 +32,7 @@ export default function Contact() {
             </StyledHeader>
             <ContactText>
                 <p>
-                So you need a full-stack developer? Don't be shy and <a href="mailto:henriquetome98@gmail.com">get in touch</a>! 
+                So you need a full-stack developer? Don't be shy and <AnimatedLink href="mailto:henriquetome98@gmail.com">get in touch</AnimatedLink>! 
                 <br />
                 I'm looking for new opportunities for my career and would love to know the challenges your company presents. I'm up to the challenge!
                 </p>
