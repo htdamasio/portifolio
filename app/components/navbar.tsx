@@ -4,7 +4,7 @@ import { Button } from "./buttons";
 import { Link } from "@remix-run/react"
 import logo from "~/icons/logo.svg"
 import { useState } from "react"
-import { RiMenuLine, RiCloseLine } from "react-icons/ri";
+import { RiMenuLine, RiCloseLine, RiNewspaperLine } from "react-icons/ri";
 
 type item = {
     url: string,
@@ -51,17 +51,9 @@ const NavBar = styled('header', {
     color: "$secondary",
     px: "1.5rem",
     zIndex: "11",
-    "@sm": { py: '0px' },
-
-    ".wrapper": {
-        flexbt: '',
-        width: "100%",
-        maxWidth: "1600px",
-        "@sm": { pr: '10px' },
-    },
 
     ".navbar-logo": {
-        width: "100px",
+        width: "80px",
         "& img": {
             py: "15px",
         },
@@ -87,6 +79,7 @@ const NavBar = styled('header', {
         '.desktop-resume': {
             fontFamily: "$mono",
             "@sm": { display: "none" },
+            // mr: "15px"
         },
         ".navbar-cta__menu": {
             display: "none",
@@ -102,7 +95,26 @@ const NavBar = styled('header', {
             },
         },
     },
+    "@sm": {
+        display: "none",
+        py: "0px"
+    },
 });
+
+const NavBarWrapper = styled('div', {
+    flexbt: '',
+    width: "100%",
+    maxWidth: "1600px",
+    mx: "10px",
+    "@sm": { px: '10px' },
+})
+
+const NavBarMobile = styled(NavBar, {
+    display: "none",
+    "@sm": {
+        display: "flex"
+    },
+})
 
 const MobileMenu = styled('aside', {
     display: "flex",
@@ -110,7 +122,7 @@ const MobileMenu = styled('aside', {
     alignItems: "center",
     justifyContent: "center",
     position: "fixed",
-    right: "0px",
+    left: "0px",
     top: "0", //"92px",
     bottom: "0px",
     py: "50px",
@@ -131,13 +143,30 @@ const MobileMenu = styled('aside', {
     "&[aria-hidden='true']": {
         visibility: "visible",
         width: "min(75vw, 400px)",
-        body: {
-            filter: "blur(100px)",
+        "ul": {
+            "& li": {
+                opacity: "1",
+                transition: "$slowEnter"
+            }
+        },
+        "button":{
+            opacity: "1",
+            transition: "$slowEnter",
         }
     },
     "&[aria-hidden='false']": {
         visibility: "hidden",
         width: "0",
+        "ul": {
+            "& li": {
+                opacity: "0",
+                transition: "$slowEnter"
+            }
+        },
+        "button":{
+            opacity: "0",
+            transition: "$slowEnter"   
+        }
     },
 
     "ul": {
@@ -155,6 +184,20 @@ const MobileMenu = styled('aside', {
             },
         },
     },
+});
+
+const ResumeMobile = styled('div', {
+    "& a": {
+        textDecoration: "none",
+        color: "$secondary"
+    },
+    "& svg": {
+        width: "30px",
+        height: "30px",
+        cursor: "pointer",
+        position: "relative",
+        zIndex: "99"
+    },    
 })
 
 export default function NavigationBar() {
@@ -172,9 +215,9 @@ export default function NavigationBar() {
         <ResponsiveContainer>
             <Box align="center" justify="center">
                 <NavBar>
-                    <div className="wrapper">
+                    <NavBarWrapper>
                         <Box direction="row" align="center" className="navbar-logo">
-                            <img src={logo} />
+                            <img loading="lazy" src={logo} />
                             <div className="navbar-logo__anchors">
                                 <ul>
                                     {navLinks &&
@@ -199,6 +242,12 @@ export default function NavigationBar() {
                                     Resume
                                 </a>
                             </Button>
+                        </Box>
+                    </NavBarWrapper>
+                </NavBar>
+                <NavBarMobile>
+                    <NavBarWrapper>
+                        <Box direction="row" align="center" className="navbar-cta">
                             <div className="navbar-cta__menu">
                                 {displayMenuIcon()}
                                 <MobileMenu
@@ -217,22 +266,20 @@ export default function NavigationBar() {
                                                 </li>
                                             ))}
                                     </ul>
-                                    <Button
-                                        size="sm"
-                                        style="outline"
-                                        bordered
-                                        rounded
-                                    >
-                                        <a href="./resume.pdf" target="_blank"
-                                            rel="noreferrer">
-                                            Resume
-                                        </a>
-                                    </Button>
                                 </MobileMenu>
                             </div>
                         </Box>
-                    </div>
-                </NavBar>
+                        <Box direction="row" align="center" className="navbar-logo">
+                            <img loading="lazy" src={logo} />
+                        </Box>
+                        <ResumeMobile>
+                            <a href="./resume.pdf" target="_blank"
+                                        rel="noreferrer">
+                                <RiNewspaperLine />
+                            </a>
+                        </ResumeMobile>                        
+                    </NavBarWrapper>
+                </NavBarMobile>
             </Box>
         </ResponsiveContainer >
     );

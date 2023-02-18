@@ -120,6 +120,7 @@ export default function About() {
                 </div>
                 <ProfileWrapper>
                     <img
+                        loading="lazy"
                         src={profile}
                     />
 
