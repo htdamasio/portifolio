@@ -2,7 +2,7 @@ import { styled } from "~/configuration.stitches";
 
 export const SmallHeading = styled('a', {
     color: "$secondary",
-    fontSize: "clamp($7,4vw,$5)",
+    fontSize: "clamp(14px,4vw,$5)",
 
     fontFamily: "$mono",
     fontWeight: "$light",
@@ -182,5 +182,32 @@ export const StyledUlList = styled('ul', {
             color: "$secondary",
             lineHeight: "12px"
         }
+    }
+});
+
+export const AnimatedLink = styled('a', {
+    display: "inline-block",
+    textDecoration: "none",
+    textDecorationSkipInk: "auto",
+    position: "relative",
+    transition: "$slowEnter",
+    color: "$secondary",
+
+    "&:hover": {
+        outline: "0px",
+        "&:after": {
+            width: "100%"
+        }
+    },
+    "&:after": {
+        content: "",
+        display: "block",
+        width: '0px',
+        height: '1px',
+        position: "relative",
+        bottom: "0.05em",
+        backgroundColor: "$secondary",
+        transition: "$slowEnter",
+        opacity: "0.5",
     }
 });

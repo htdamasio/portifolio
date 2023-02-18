@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { styled } from "~/configuration.stitches";
-import { SectionStyled, StyledHeader, StyledUlList } from "~/styles/generalStyles";
+import { AnimatedLink, SectionStyled, StyledHeader, StyledUlList } from "~/styles/generalStyles";
 import { useState, useEffect } from "react";
 
 const JobsSectionStyled = styled(SectionStyled, {
@@ -241,7 +241,7 @@ export default function Jobs() {
                             <span>{selectedJob.title}</span>
                             <span className="company">
                                 {` @ `}
-                                <a href={selectedJob.url}>{selectedJob.company}</a>
+                                <AnimatedLink href={selectedJob.url}>{selectedJob.company}</AnimatedLink>
                             </span>
                             <p className="range">{selectedJob.range}</p>
                         </JobHeader>

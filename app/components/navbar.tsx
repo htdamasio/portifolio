@@ -1,6 +1,5 @@
 import { styled } from "~/configuration.stitches";
 import { Box } from "./box";
-import { ResponsiveContainer } from "./container";
 import { Button } from "./buttons";
 import { Link } from "@remix-run/react"
 import logo from "~/icons/logo.svg"
@@ -29,6 +28,13 @@ const navLinks: Array<item> = [
         url: '/#contact',
     },
 ];
+
+const ResponsiveContainer = styled("div", {
+    margin: "0",
+    width: "auto",
+    boxShadow: `0 10px 30px -10px #121212`,
+    position: "relative",
+})
 
 const NavBar = styled('header', {
     flexbt: '',

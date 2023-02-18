@@ -1,4 +1,4 @@
-import { SectionStyled, StyledHeader, StyledUlList } from "~/styles/generalStyles";
+import { AnimatedLink, SectionStyled, StyledHeader, StyledUlList } from "~/styles/generalStyles";
 import { styled } from "~/configuration.stitches";
 import { gql, useQuery } from "@apollo/client";
 import { useState, useEffect } from "react"
@@ -106,10 +106,10 @@ export default function About() {
                 <div>
                     <TextWrapper>
                         <p>
-                            Hello! My name is Henrique and what fulfills me is creating things that make other <a>people's lives better</a>. My interest in web development started back in 2019 when I get a internship at an startup. It just felt right since the beginning and I just get more and more excited about it.
+                            Hello! My name is Henrique and what fulfills me is creating things that make other <AnimatedLink>people's lives better</AnimatedLink>. My interest in web development started back in 2019 when I get a internship at an startup. It just felt right since the beginning and I just get more and more excited about it.
                         </p>
                         <p>
-                            Advancing a little further, I end up switching to backend development, so this gave me a very good knowledge about server-side applications. My main goal these days is unity the passion about front-end with very powerfull back-end applications to help build amazing and <a>life changing experiences</a>.
+                            Advancing a little further, I end up switching to backend development, so this gave me a very good knowledge about server-side applications. My main goal these days is unity the passion about front-end with very powerfull back-end applications to help build amazing and <AnimatedLink>life changing experiences</AnimatedLink>.
                         </p>
 
                         <p>Here are a few technologies I’ve been working with recently:</p>
