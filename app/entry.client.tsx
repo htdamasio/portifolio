@@ -3,6 +3,8 @@ import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { initApollo } from "./context/apollo";
 import { ApolloProvider } from "@apollo/client/react";
+import reportWebVitals from './reportWebVitals'
+import {sendToVercelAnalytics} from './vitals'
 
 function Client() {
   const client = initApollo(false)
@@ -32,3 +34,5 @@ if (typeof requestIdleCallback === "function") {
   // https://caniuse.com/requestidlecallback
   setTimeout(hydrate, 1);
 }
+
+reportWebVitals(sendToVercelAnalytics)
