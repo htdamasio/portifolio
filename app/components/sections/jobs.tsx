@@ -4,7 +4,7 @@ import { SectionStyled, StyledHeader, StyledUlList } from "~/styles/generalStyle
 import { useState, useEffect } from "react";
 
 const JobsSectionStyled = styled(SectionStyled, {
-    py: "100px",
+    py: "75px",
     maxWidth: "700px"
 });
 
@@ -80,7 +80,7 @@ const JobButton = styled('button', {
     },
 
     "&:hover, &:focus": {
-        background: "$secondaryHover",
+        // background: "$secondaryHover",
         color: "$secondary"
     },
 

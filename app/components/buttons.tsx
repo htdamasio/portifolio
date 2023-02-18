@@ -6,7 +6,7 @@ export const Button = styled("button", {
     backgroundColor: "none",
     border: "none",
     fontSize: "$6",
-    fontFamily: "$system",
+    fontFamily: "$mono",
     lineHeight: "1",
     textDecoration: "none",
     cursor: "pointer",
